@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 import { Type } from 'class-transformer';
 import { IsInt, IsOptional, IsString, Min } from 'class-validator';
 
@@ -8,6 +7,10 @@ export class GetJobsQueryDto {
   @IsInt()
   @Min(1)
   page?: number;
+
+  @IsOptional()
+  @IsString()
+  search?: string;
 
   @IsOptional()
   @Type(() => Number)

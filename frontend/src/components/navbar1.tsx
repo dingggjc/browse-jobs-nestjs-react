@@ -1,6 +1,7 @@
 "use client"
 
 import { Menu } from "lucide-react"
+import { DotLottieReact } from "@lottiefiles/dotlottie-react"
 
 import {
   Accordion,
@@ -58,13 +59,13 @@ interface Navbar1Props {
 
 const Navbar1 = ({
   logo = {
-    url: "https://www.shadcnblocks.com",
+    url: "/",
     src: "https://deifkwefumgah.cloudfront.net/shadcnblocks/block/logos/shadcnblockscom-icon.svg",
     alt: "logo",
-    title: "Shadcnblocks.com",
+    title: "Find Jobs",
   },
   menu = [
-    { title: "Jobs", url: "#" },
+    { title: "Jobs", url: "/jobs" },
     { title: "Companies", url: "#" },
     { title: "Salaries", url: "#" },
     { title: "Resources", url: "#" },
@@ -72,6 +73,21 @@ const Navbar1 = ({
   ],
   className,
 }: Navbar1Props) => {
+  const isLottieLogo = logo.src.toLowerCase().endsWith(".lottie")
+
+  const logoMedia = isLottieLogo ? (
+    <div className="h-16 w-16">
+      <DotLottieReact
+        src={logo.src}
+        loop
+        autoplay
+        style={{ width: "100%", height: "100%" }}
+      />
+    </div>
+  ) : (
+    <img src={logo.src} className="max-h-16" alt={logo.alt} />
+  )
+
   return (
     <section className={cn("px-6 py-4", className)}>
       <div className="mx-auto w-full max-w-screen-2xl">
@@ -80,11 +96,7 @@ const Navbar1 = ({
           <div className="flex items-center gap-6">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
+              {logoMedia}
               <span className="text-lg font-semibold tracking-tighter">
                 {logo.title}
               </span>
@@ -104,11 +116,7 @@ const Navbar1 = ({
           <div className="flex items-center justify-between">
             {/* Logo */}
             <a href={logo.url} className="flex items-center gap-2">
-              <img
-                src={logo.src}
-                className="max-h-8 dark:invert"
-                alt={logo.alt}
-              />
+              {logoMedia}
             </a>
             <Sheet>
               <SheetTrigger asChild>
@@ -120,11 +128,7 @@ const Navbar1 = ({
                 <SheetHeader>
                   <SheetTitle>
                     <a href={logo.url} className="flex items-center gap-2">
-                      <img
-                        src={logo.src}
-                        className="max-h-8 dark:invert"
-                        alt={logo.alt}
-                      />
+                      {logoMedia}
                     </a>
                   </SheetTitle>
                 </SheetHeader>

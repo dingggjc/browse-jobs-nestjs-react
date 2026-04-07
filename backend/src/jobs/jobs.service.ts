@@ -21,6 +21,14 @@ export class JobsService {
       );
     }
 
+    if (query.search) {
+      filtered = filtered.filter(
+        (j) =>
+          j.title.toLowerCase().includes(query.search!.toLowerCase()) ||
+          j.company.toLowerCase().includes(query.search!.toLowerCase()),
+      );
+    }
+
     const page = Number(query.page) || 1;
     const limit = Number(query.limit) || 10;
 
